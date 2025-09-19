@@ -5,3 +5,13 @@
     align-items: center;
 }
 
+.num,.display,.operator,.clear{
+    font-size: 25px;
+    width: 70px;
+    height:70px;
+}
+
+.display,.clear{
+    width: 350px;
+}
+
