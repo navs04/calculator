@@ -16,6 +16,9 @@ function divide(a,b){
 
 let result;
 function operate(opr,num1,num2){
+    num1=Number(num1);
+    num2=Number(num2);
+
     if(opr=='+'){
         result=add(num1,num2);
     }
@@ -65,9 +68,13 @@ for(let i=0;i<5;i++){
         if(op.textContent=='='){
             operate(operator[0],number1.join(''),number2.join(''));
             display.textContent=result;
+            number1=[];
+            number1.push(result);
+            number2=[];
+            operator=[];
         }
         else{
-            display.textContent=operator[0];
+            display.textContent=op.textContent;
         }
     })
 
@@ -127,5 +134,6 @@ clearBtn.addEventListener('click',function(){
     number1=[];
     number2=[];
     operator=[];
+    operatorClicked=false;
 })
 
