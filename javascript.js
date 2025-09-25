@@ -29,10 +29,33 @@ function operate(opr,num1,num2){
         result=multiply(num1,num2);
     }
     else if(opr='/'){
-        result=divide(num1,num2);
+        if(num2==0){
+            result="Error: cannot divide by 0";
+        }
+        else{
+            result=divide(num1,num2);
+        }
     }
     else{
         result='invalid operator';
+    }
+
+    function hasLongDecimals(result){
+        const resultString=String(result);
+        const decimalPart= resultString.split('.')[1];
+        if(decimalPart>10){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function isInt(n){
+        return n%1===0;
+    }
+    if(isInt(result)==false && hasLongDecimals(result)==true){
+        result=result.toFixed(10);
     }
 }
 
@@ -66,12 +89,22 @@ for(let i=0;i<5;i++){
         operator.push(op.textContent);
 
         if(op.textContent=='='){
-            operate(operator[0],number1.join(''),number2.join(''));
+            operate(operator[operator.length-2],number1.join(''),number2.join(''));
             display.textContent=result;
             number1=[];
             number1.push(result);
             number2=[];
             operator=[];
+        }
+        else if(op.textContent=='+' || op.textContent=='-'||op.textContent=='*'||op.textContent=='/'){
+            display.textContent=op.textContent;
+            if(number2.length>0){
+                result=0;
+                operate(operator[operator.length-2],number1.join(''),number2.join(''));
+                number1=[];
+                number1.push(result);
+                number2=[];
+            }
         }
         else{
             display.textContent=op.textContent;
