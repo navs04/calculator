@@ -76,6 +76,7 @@ let number1=[];
 let number2=[];
 let operator=[];
 let operatorClicked=false;
+let resultDisplayed=false;
 
 for(let i=0;i<5;i++){
     let arr=['+','-','*','/','='];
@@ -91,6 +92,7 @@ for(let i=0;i<5;i++){
         if(op.textContent=='='){
             operate(operator[operator.length-2],number1.join(''),number2.join(''));
             display.textContent=result;
+            resultDisplayed=true;
             number1=[];
             number1.push(result);
             number2=[];
@@ -124,7 +126,15 @@ for(let i=0;i<10;i++){
         div1.appendChild(num);
 
         num.addEventListener('click',function(){
-            if(operatorClicked==true){
+            if(resultDisplayed==true){
+                number1=[num.textContent];
+                number2=[];
+                operator=[];
+                operatorClicked=false;
+                display.textContent=number1.join('');
+                resultDisplayed=false;
+            }
+            else if(operatorClicked==true){
                 number2.push(num.textContent);
                 display.textContent=number2.join('');
             }
@@ -141,7 +151,15 @@ for(let i=0;i<10;i++){
         div2.appendChild(num);
 
         num.addEventListener('click',function(){
-            if(operatorClicked==true){
+            if(resultDisplayed==true){
+                number1=[num.textContent];
+                number2=[];
+                operator=[];
+                operatorClicked=false;
+                display.textContent=number1.join('');
+                resultDisplayed=false;
+            }
+            else if(operatorClicked==true){
                 number2.push(num.textContent);
                 display.textContent=number2.join('');
             }
